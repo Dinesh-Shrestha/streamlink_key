@@ -1,5 +1,177 @@
 # Changelog
 
+## streamlink 7.0.0 (2024-11-04)
+
+- BREAKING: dropped support for [EOL Python 3.8](https://peps.python.org/pep-0569/#lifespan) (Win 7/8 are now unsupported) ([#6230](https://github.com/streamlink/streamlink/pull/6230))
+- BREAKING/CLI: [removed deprecated config file and plugin config file paths](https://streamlink.github.io/migrations.html#config-file-paths) ([#6149](https://github.com/streamlink/streamlink/pull/6149))
+- BREAKING/CLI: [removed deprecated plugin sideloading paths](https://streamlink.github.io/migrations.html#custom-plugins-sideloading-paths) ([#6150](https://github.com/streamlink/streamlink/pull/6150))
+- BREAKING/CLI: [removed deprecated `--force-progress` CLI argument](https://streamlink.github.io/migrations.html#force-progress) ([#6196](https://github.com/streamlink/streamlink/pull/6196))
+- BREAKING/CLI: [removed deprecated stream-type related CLI arguments](https://streamlink.github.io/migrations.html#stream-type-related-cli-arguments) ([#6232](https://github.com/streamlink/streamlink/pull/6232))
+  - `--hls-segment-attempts`
+  - `--hls-segment-threads`
+  - `--hls-segment-timeout`
+  - `--hls-timeout`
+  - `--http-stream-timeout`
+- BREAKING/API: [removed deprecated stream-type related session options](https://streamlink.github.io/migrations.html#stream-type-related-cli-arguments) ([#6232](https://github.com/streamlink/streamlink/pull/6232))
+  - `hls-segment-attempts`
+  - `hls-segment-threads`
+  - `hls-segment-timeout`
+  - `hls-timeout`
+  - `dash-segment-attempts`
+  - `dash-segment-threads`
+  - `dash-segment-timeout`
+  - `dash-timeout`
+  - `http-stream-timeout`
+- BREAKING/API: [removed deprecated import paths for `HTTPSession` and `HTTPAdapter`s](https://streamlink.github.io/migrations.html#httpsession-and-httpadapters) ([#6274](https://github.com/streamlink/streamlink/pull/6274))
+- BREAKING/API: [removed deprecated import paths for `NoPluginError`, `NoStreamsError`, `PluginError` and `Plugin`](https://streamlink.github.io/migrations.html#streamlink-plugins-re-exports) ([#6274](https://github.com/streamlink/streamlink/pull/6274))
+- BREAKING/packaging: dropped "32 bit" Windows x86 and Linux AppImage i686 builds ([#6052](https://github.com/streamlink/streamlink/pull/6052))
+- Removed: flawed implementation of VLC-specific player variables ([#6251](https://github.com/streamlink/streamlink/pull/6251), [#6253](https://github.com/streamlink/streamlink/pull/6253))
+- Deprecated: [`--verbose-player` CLI argument in favor of `--player-verbose`](https://streamlink.github.io/deprecations.html#verbose-player) ([#6227](https://github.com/streamlink/streamlink/pull/6227))
+- Deprecated: [`--fifo` CLI argument in favor of `--player-fifo`](https://streamlink.github.io/deprecations.html#fifo) ([#6227](https://github.com/streamlink/streamlink/pull/6227))
+- Added: warning messages for deprecated/suppressed plugin arguments ([#6240](https://github.com/streamlink/streamlink/pull/6240), [#6249](https://github.com/streamlink/streamlink/pull/6249))
+- Fixed: errors on missing `stdin` file descriptor ([#6239](https://github.com/streamlink/streamlink/pull/6239))
+- Fixed: `--interface` not having an effect on custom `HTTPAdapter`s ([#6223](https://github.com/streamlink/streamlink/pull/6223))
+- Updated plugins:
+  - afreeca: renamed to soop, overhauled plugin and deprecated old plugin CLI arguments ([#6247](https://github.com/streamlink/streamlink/pull/6247), [#6257](https://github.com/streamlink/streamlink/pull/6257))
+  - ruv: rewritten and fixed plugin ([#6262](https://github.com/streamlink/streamlink/pull/6262))
+  - tv3cat: updated plugin matchers ([#6242](https://github.com/streamlink/streamlink/pull/6242))
+- Docs: updated documentation of various CLI arguments ([#6226](https://github.com/streamlink/streamlink/pull/6226), [#6255](https://github.com/streamlink/streamlink/pull/6255), [#6225](https://github.com/streamlink/streamlink/pull/6225))
+- Chore: updated typing annotations (PEP 563, PEP 585, PEP 604, PEP 613) ([#6218](https://github.com/streamlink/streamlink/pull/6218))
+- Chore: reformatted the whole code base using ruff ([#6260](https://github.com/streamlink/streamlink/pull/6260))
+- Build: bumped `trio` dependency to `>=0.25.0,<1` on Python >= 3.13 ([#6244](https://github.com/streamlink/streamlink/pull/6244))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.11.0...7.0.0)
+
+
+## streamlink 6.11.0 (2024-10-01)
+
+- Deprecated: [`--record-and-pipe=...` in favor of `--stdout --record=...`](https://streamlink.github.io/deprecations.html#r-record-and-pipe) (and explicitly disallowed `--stdout --output=...`) ([#6194](https://github.com/streamlink/streamlink/pull/6194))
+- Fixed: error when setting both `--http-no-ssl-verify` and `--http-disable-dh` ([#6205](https://github.com/streamlink/streamlink/pull/6205))
+- Fixed: `--player-passthrough` without a resolved default `--player` ([#6207](https://github.com/streamlink/streamlink/pull/6207))
+- Fixed: error when stdout/stderr file descriptors are missing ([#6197](https://github.com/streamlink/streamlink/pull/6197))
+- Updated: webbrowser API's Chrome devtools protocol to latest version ([#6211](https://github.com/streamlink/streamlink/pull/6211))
+- Updated plugins:
+  - crunchyroll: removed plugin ([#6179](https://github.com/streamlink/streamlink/pull/6179))
+  - dlive: fixed missing stream URL signature ([#6171](https://github.com/streamlink/streamlink/pull/6171))
+  - facebook: removed plugin ([#6199](https://github.com/streamlink/streamlink/pull/6199))
+  - mildom: removed plugin ([#6198](https://github.com/streamlink/streamlink/pull/6198))
+  - tvrby: removed plugin ([#6202](https://github.com/streamlink/streamlink/pull/6202))
+  - tvrplus: removed plugin ([#6203](https://github.com/streamlink/streamlink/pull/6203))
+  - twitch: fixed client-integrity token acquirement ([#6211](https://github.com/streamlink/streamlink/pull/6211))
+  - vk: fixed API params and validation schema ([#6178](https://github.com/streamlink/streamlink/pull/6178))
+  - webtv: removed plugin ([#6172](https://github.com/streamlink/streamlink/pull/6172))
+  - zengatv: removed plugin ([#6174](https://github.com/streamlink/streamlink/pull/6174))
+  - zhanqi: removed plugin ([#6173](https://github.com/streamlink/streamlink/pull/6173))
+- Tests: removed `pytest-asyncio` dependency ([#6208](https://github.com/streamlink/streamlink/pull/6208))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.10.0...6.11.0)
+
+
+## streamlink 6.10.0 (2024-09-06)
+
+- Added: official support for Python 3.13 ([#6133](https://github.com/streamlink/streamlink/pull/6133))
+- Added: `--logformat` and `--logdateformat` ([#6138](https://github.com/streamlink/streamlink/pull/6138), [#6144](https://github.com/streamlink/streamlink/pull/6144))
+- Added: `--ffmpeg-loglevel` ([#6161](https://github.com/streamlink/streamlink/pull/6161))
+- Fixed: continuous logging errors when stdout stream was closed on the reading end ([#6142](https://github.com/streamlink/streamlink/pull/6142))
+- Fixed: HTTP proxy config being used when getting webbrowser API's websocket IPC address ([#6130](https://github.com/streamlink/streamlink/pull/6130))
+- Updated plugins:
+  - booyah: removed plugin ([#6162](https://github.com/streamlink/streamlink/pull/6162))
+  - douyin: fixed validation schema ([#6140](https://github.com/streamlink/streamlink/pull/6140))
+  - galatasaraytv: removed plugin ([#6163](https://github.com/streamlink/streamlink/pull/6163))
+  - idf1: removed plugin ([#6164](https://github.com/streamlink/streamlink/pull/6164))
+  - linelive: removed plugin ([#6165](https://github.com/streamlink/streamlink/pull/6165))
+  - pandalive: fixed missing HTTP headers ([#6148](https://github.com/streamlink/streamlink/pull/6148))
+  - tiktok: fixed schema of inaccessible streams ([#6160](https://github.com/streamlink/streamlink/pull/6160))
+  - youtube: disabled VODs, as they are currently non-functional ([#6135](https://github.com/streamlink/streamlink/pull/6135))
+- Docs: bumped `sphinx-design >=0.5.0,<=0.6.1`, enabling `sphinx >=8.0.0` ([#6137](https://github.com/streamlink/streamlink/pull/6137))
+- Tests: fixed `pytest-asyncio` warnings ([#6143](https://github.com/streamlink/streamlink/pull/6143))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.9.0...6.10.0)
+
+
+## streamlink 6.9.0 (2024-08-12)
+
+- Added: `streamlink.plugin.api.webbrowser` subpackage with the `aws_waf` module ([#6102](https://github.com/streamlink/streamlink/pull/6102), [#6118](https://github.com/streamlink/streamlink/pull/6118))
+- Added: `max_buffer_size` kwarg to `CDPClient.session()` ([#6101](https://github.com/streamlink/streamlink/pull/6101))
+- Added: webbrowser `User-Agent` header override in headless mode ([#6114](https://github.com/streamlink/streamlink/pull/6114))
+- Changed: default value of `--webbrowser-headless` from `True` to `False` ([#6116](https://github.com/streamlink/streamlink/pull/6116))
+- Changed: unicode characters to be unescaped in JSON output, if possible ([#6080](https://github.com/streamlink/streamlink/pull/6080))
+- Fixed: potential character encoding issues in Streamlink's logger ([#6081](https://github.com/streamlink/streamlink/pull/6081))
+- Updated plugins:
+  - nicolive: updated plugin matcher ([#6127](https://github.com/streamlink/streamlink/pull/6127))
+  - okru: fixed validation schema ([#6085](https://github.com/streamlink/streamlink/pull/6085))
+  - radionet: removed plugin ([#6091](https://github.com/streamlink/streamlink/pull/6091))
+  - sportschau: fixed plugin (HLS streams with packed audio streams remain unsupported) ([#6104](https://github.com/streamlink/streamlink/pull/6104))
+  - tiktok: fixed room ID validation schema ([#6106](https://github.com/streamlink/streamlink/pull/6106))
+  - tvp: added support for sport.tvp.pl ([#6097](https://github.com/streamlink/streamlink/pull/6097))
+  - twitch: added `--twitch-force-client-integrity` ([#6113](https://github.com/streamlink/streamlink/pull/6113))
+  - twitch: fixed broken client-integrity token decoding+parsing ([#6113](https://github.com/streamlink/streamlink/pull/6113))
+  - twitch: removed the `headless=False` override ([#6117](https://github.com/streamlink/streamlink/pull/6117))
+  - vimeo: removed error messages for unsupported DASH streams ([#6128](https://github.com/streamlink/streamlink/pull/6128))
+  - vk: fixed validation schema ([#6096](https://github.com/streamlink/streamlink/pull/6096))
+  - vtvgo: resolved AWS Web Application Firewall bot detection ([#6102](https://github.com/streamlink/streamlink/pull/6102))
+  - yupptv: fixed plugin, added ad filtering ([#6093](https://github.com/streamlink/streamlink/pull/6093))
+- Docs: added webbrowser API metadata to plugin descriptions ([#6115](https://github.com/streamlink/streamlink/pull/6115))
+- Docs: updated build-dependencies and the furo theme ([#6126](https://github.com/streamlink/streamlink/pull/6126))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.8.3...6.9.0)
+
+
+## streamlink 6.8.3 (2024-07-11)
+
+Patch release:
+
+- Updated plugins:
+  - tiktok: new plugin ([#6073](https://github.com/streamlink/streamlink/pull/6073))
+  - twitch: fixed channel names with uppercase characters ([#6071](https://github.com/streamlink/streamlink/pull/6071))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.8.2...6.8.3)
+
+
+## streamlink 6.8.2 (2024-07-04)
+
+Patch release:
+
+- Updated plugins:
+  - douyin: new plugin ([#6059](https://github.com/streamlink/streamlink/pull/6059))
+  - huya: fixed stream URLs ([#6058](https://github.com/streamlink/streamlink/pull/6058))
+  - pluzz: fixed API URL, stream tokens and validation schemas ([#6048](https://github.com/streamlink/streamlink/pull/6048))
+  - twitch: added info log messages about ad break durations ([#6051](https://github.com/streamlink/streamlink/pull/6051))
+  - twitch: fixed clip URLs ([#6045](https://github.com/streamlink/streamlink/pull/6045))
+  - twitch: fixed discontinuity warning spam in certain circumstances ([#6022](https://github.com/streamlink/streamlink/pull/6022))
+  - vidio: fixed stream tokens, added metadata ([#6057](https://github.com/streamlink/streamlink/pull/6057))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.8.1...6.8.2)
+
+
+## streamlink 6.8.1 (2024-06-18)
+
+Patch release:
+
+- Fixed: failed HTTPAdapter tests on some OpenSSL configurations ([#6040](https://github.com/streamlink/streamlink/pull/6040), [#6042](https://github.com/streamlink/streamlink/pull/6042))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.8.0...6.8.1)
+
+
+## streamlink 6.8.0 (2024-06-17)
+
+Release highlights:
+
+- Added: sha256 checksum to log message when side-loading plugins ([#6023](https://github.com/streamlink/streamlink/pull/6023))
+- Added: `SSLContextAdapter` to `streamlink.session.http` ([#6024](https://github.com/streamlink/streamlink/pull/6024))
+- Deprecated: [old re-exports in `streamlink.plugins` package](https://streamlink.github.io/deprecations.html#streamlink-plugins-re-exports) ([#6005](https://github.com/streamlink/streamlink/pull/6005))
+- Updated plugins:
+  - bilibili: fixed validation schema for offline channels ([#6032](https://github.com/streamlink/streamlink/pull/6032))
+  - chzzk: fixed channels without content ([#6002](https://github.com/streamlink/streamlink/pull/6002))
+  - cnbce: new plugin ([#6029](https://github.com/streamlink/streamlink/pull/6029))
+  - kick: new plugin ([#6012](https://github.com/streamlink/streamlink/pull/6012), [#6021](https://github.com/streamlink/streamlink/pull/6021), [#6024](https://github.com/streamlink/streamlink/pull/6024))
+  - tf1: added authentication via `--tf1-email` and `--tf1-password` ([#5983](https://github.com/streamlink/streamlink/pull/5983))
+  - tvp: fixed live streams ([#6037](https://github.com/streamlink/streamlink/pull/6037))
+  - welt: fixed live streams ([#6011](https://github.com/streamlink/streamlink/pull/6011))
+
+[Full changelog](https://github.com/streamlink/streamlink/compare/6.7.4...6.8.0)
+
+
 ## streamlink 6.7.4 (2024-05-12)
 
 Patch release:
